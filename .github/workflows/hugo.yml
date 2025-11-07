@@ -1,21 +1,48 @@
 name: Deploy Hugo site to Pages
+
 on:
-  push: { branches: [ main ] }
+  push:
+    branches: [ main ]
   workflow_dispatch:
-permissions: { contents: read, pages: write, id-token: write }
-concurrency: { group: "pages", cancel-in-progress: true }
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with: { submodules: true, fetch-depth: 0 }
-      - uses: peaceiris/actions-hugo@v3
-        with: { hugo-version: "0.151.0", extended: true }
-      - name: Build
-        run: hugo --minify --baseURL "https://roki-xing.github.io/my-hugo-site/"
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: ./public }
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.151.0"
+          extended: true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build (to _site)
+        run: |
+          hugo --minify --baseURL "https://roki-xing.github.io/my-hugo-site/" -d _site
+          test -f _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
