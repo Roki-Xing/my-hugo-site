@@ -1,0 +1,74 @@
+baseURL = "https://roki-xing.github.io/"
+languageCode = "zh-cn"
+title = "Roki's Blog"
+theme = "PaperMod"
+
+# 新分页语法
+[pagination]
+pagerSize = 10
+
+# 生成 sitemap 与 robots
+enableRobotsTXT = true
+
+# Markdown 渲染与代码高亮
+[markup]
+  [markup.highlight]
+  noClasses = false
+  guessSyntax = true
+  lineNos = true
+  codeFences = true
+  tabWidth = 2
+  [markup.goldmark.renderer]
+  unsafe = true
+
+# 站点作者与主题参数
+[params]
+  defaultTheme = "auto"
+  showReadingTime = true
+  showToc = true
+  tocOpen = false
+  math = true                # KaTeX 打开
+  comments = false
+  showCodeCopyButtons = true
+  enableEmoji = true
+
+# 首页信息（可删）
+[params.homeInfoParams]
+  Title = "Hello, I'm Roki"
+  Content = "EOH. 数学. 研究随笔与工程笔记"
+
+# 菜单
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "文章"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "分类"
+    url = "/categories/"
+    weight = 3
+  [[menu.main]]
+    name = "标签"
+    url = "/tags/"
+    weight = 4
+  [[menu.main]]
+    name = "搜索"
+    url = "/search/"
+    weight = 5
+  [[menu.main]]
+    name = "关于"
+    url = "/about/"
+    weight = 6
+
+# Taxonomies
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# 输出 RSS
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
