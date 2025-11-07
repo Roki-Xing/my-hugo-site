@@ -1,4 +1,4 @@
-baseURL = "https://roki-xing.github.io/"
+baseURL = "https://roki-xing.github.io/my-hugo-site/"
 languageCode = "zh-cn"
 title = "Roki's Blog"
 theme = "PaperMod"
